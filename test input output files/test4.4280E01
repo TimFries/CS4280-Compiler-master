@@ -1,0 +1,9 @@
+program
+  int x
+  start
+    read >> x ;
+    decision ( x >> 0 )
+    start
+      print << x
+    stop
+  stop

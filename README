@@ -1,0 +1,93 @@
+
+***********IMPORTANT************
+
+OPTION: LOCAL VARIABLES
+FSA TABLE: scan.h  contains table
+
+    >> =, << = FAIL
+I used >>= as a single token so if there is a space
+between them it sends an error and exits the parser.
+So when using greater-than/less-than or equal to statements
+there needs to be no space between them.
+
+<<= or >>=  WORKS
+<< = or >> = RESULTS IN ERROR
+
+**********IMPORTANT*************
+
+******CHANGES SINCE P3*******
+Added two new files codeGeneration.h and codeGeneration.c
+startGen() is called by main.c to start generating the .asm after passing
+static semantics and parsing.
+*****************************
+***************************************************************************
+*          		Name: Timothy Fries                               *
+*                       Date: 5/6/2017                                    *
+*                       Assignment: P4 (FINAL COMPILER)                   *
+***************************************************************************
+
+			OPTIONS: LOCAL VARIABLES
+MAKE INFORMATION
+
+make all	:makes all compiles all the code and creates comp
+make clean	:Removes all the .o files, tmp.txt, and comp
+make veryclean	:Removes all the .o files, comp, all .asm files and tmp.txt
+
+
+***************************************************************************
+*Tested all files in P4 and P3 and all worked as intended 
+
+comp filename  :takes file with extension .4280E01 and if parsing and semantics pass
+                outputs the as filename.asm  where filename is the name of the original file
+
+comp           :Takes input from the user and puts it in a tmp file to read from by the scanner
+                if the semantics and parsing are okay it will output the file out.asm
+
+comp < filename.4280E01 :Scans the file and if the parsing and semantics are okay
+                         outputs the file out.asm
+****************************************************************************
+
+CODE THAT WORKS:
+    IN/OUT
+    Expressions including () and negation &
+    IF statements
+    IF/ELSE IF statements
+    NESTED IF
+    LOOP
+    NESTED LOOP
+    sequence of statements in one block
+
+
+BAD CODE:
+    *When a variable is called to be used and isn't declared in the current scope
+     or parent scopes.
+    *When there is any kind of parse error that doesn't work with our BNF
+    *When >> = or << = is used as two tokens rather than one
+    *
+
+
+FSA TABLE
+
+*******IMPORTANT****************
+For this project I am using the FSA table+driver option.
+The FSA table that I am using is in the scan.h file.
+*******IMPORTANT*************** 
+
+
+The FSA table columns are labeled to make is easier to know what 
+each column is supposed to be used for depending on the character 
+that is currently being checked by the scanner.  The application 
+makes a struct array of the all the tokens that are found
+in the scanner along with any other info (line number, token instance, and
+token type).  It then outputs all the information to the screen.  I picked
+to make the struct into an array so it will be easier wehn it comes to
+parsing the tokens in the next assignment.  If an error is found it will
+display the error depending on the error number generated from the FSA
+table and then exit the program.  So if there is more than one error in
+the file that is being scanned it will display the first error and then
+exit.
+
+*****Removed a few lines and changed the file that the table is in because it is
+different compared to P1.  It is no longer in def.h, it is now in scan.h 
+because the scanner is the only one that uses the table information.
+*********
